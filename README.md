@@ -1,1 +1,1 @@
-# mean-project
+# mean-course
