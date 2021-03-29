@@ -36,7 +36,8 @@ router.post('', checkAuth, multer({storage: storage}).single("image"), (req, res
         imagePath: url + '/images/' + req.file.filename,
         creator: req.userData.userId
     });
-    post.save().then(createdPost => {
+    post.save()
+    .then(createdPost => {
         res.status(201).json({
             message: 'Post added successfully',
             post: {
@@ -47,6 +48,11 @@ router.post('', checkAuth, multer({storage: storage}).single("image"), (req, res
                 imagePath: createdPost.imagePath
             }
         });
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: "Creating post failed."
+        })
     });
 });
 
